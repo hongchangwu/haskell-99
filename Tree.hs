@@ -4,11 +4,12 @@ import Data.List (nub)
 
 data Tree a = Empty | Branch a (Tree a) (Tree a)
             deriving (Show, Eq, Read)
-                     
+
+leaf :: a -> Tree a
 leaf x = Branch x Empty Empty                     
 
 trees :: Eq a => a -> Int -> [Tree a]
-trees x 0 = []
+trees _ 0 = []
 trees x 1 = [leaf x]
 trees x n = nub $ concat [insert x t | t <- trees x (n - 1)]
 
