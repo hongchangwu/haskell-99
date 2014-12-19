@@ -1,8 +1,7 @@
 import MultiTree
 
 stringToTree :: String -> MultiTree Char
-stringToTree (x : "^") = Node x []
-stringToTree xs        = Node x (map stringToTree ss)
+stringToTree xs = Node x (map stringToTree ss)
   where
     (x, ss) = tokenize xs
     tokenize s = (head s, third $ foldr build (0, [], []) (init s))
@@ -16,5 +15,4 @@ stringToTree xs        = Node x (map stringToTree ss)
         third (_, _, x) = x
 
 treeToString :: MultiTree Char -> String
-treeToString (Node x []) = x :"^"
 treeToString (Node x ts) = x : concatMap treeToString ts ++ "^"
