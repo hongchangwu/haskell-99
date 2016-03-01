@@ -19,7 +19,7 @@ adjToGraph :: (Eq a) => Adjacency a -> Graph a
 adjToGraph (Adj adjs) = Graph ns es
   where
     (ns, es) = foldr f ([], []) adjs
-    f (x, xs) (ns, es) = (x : ns, (map (\y -> (x, y)) . filter (`elem` ns)) xs ++ es)
+    f (x, xs) (ns, es) = (x : ns, (map ((,) x) . filter (`elem` ns)) xs ++ es)
 
 graphToFri :: (Eq a) => Graph a -> Friendly a
 graphToFri (Graph ns es) = Edge $ concatMap f ns
