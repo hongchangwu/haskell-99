@@ -1,4 +1,3 @@
-import Control.Applicative (liftA2)
 import Data.List (partition)
 
 paths :: Eq a => a -> a -> [(a, a)] -> [[a]]
