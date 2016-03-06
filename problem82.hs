@@ -1,10 +1,12 @@
 import Data.List (partition)
 
-paths :: Eq a => a -> a -> [(a, a)] -> [[a]]
-paths x y es = recur x es
+cycle :: Eq a => a ->  [(a, a)] -> [[a]]
+cycle x = recur x
   where
-    recur _ [] = []
+    recur u [] = []
     recur u es = xs ++ (map snd us >>= map (u :) . flip recur vs)
       where
         (us, vs) = partition ((==) u . fst) es
-        xs = map (\(a, b) -> [a, b]) . filter ((== y) . snd) $ us
+        xs = map (\(a, b) -> [a, b]) . filter ((== x) . snd) $ us
+
+    
