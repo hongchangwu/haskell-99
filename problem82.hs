@@ -1,12 +1,11 @@
+import Data.Function ((&))
 import Data.List (partition)
 
 cycle :: Eq a => a ->  [(a, a)] -> [[a]]
 cycle x = recur x
   where
     recur u [] = []
-    recur u es = xs ++ (map snd us >>= map (u :) . flip recur vs)
+    recur u es = xs ++ (map snd us >>= flip recur vs & map (u :))
       where
         (us, vs) = partition ((==) u . fst) es
-        xs = map (\(a, b) -> [a, b]) . filter ((== x) . snd) $ us
-
-    
+        xs = us & filter ((== x) . snd) & map (\(a, b) -> [a, b])
