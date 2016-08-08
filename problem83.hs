@@ -25,5 +25,3 @@ spantree (Graph ns es) = filter (liftA2 (&&) complete allconnected) trees
     allconnected (Graph [] _) = True
     allconnected g@(Graph (n:ns) _) = all (connected g n) ns
     complete (Graph ns' _) = length ns' == length ns
-                     
-                     
