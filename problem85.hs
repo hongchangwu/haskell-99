@@ -1,9 +1,7 @@
 import Data.Function ((&))
 import Data.List (find, permutations, sort)
-import Data.Map (Map)
 import Data.Maybe (fromJust)
 import Graph
-import qualified Data.Map as Map
 
 iso :: (Eq a, Ord a) => Graph a -> Graph a -> Bool
 iso g1@(Graph ns1 _) g2@(Graph ns2 _)
