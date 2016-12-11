@@ -3,17 +3,17 @@ import Data.Maybe (fromJust, mapMaybe)
 import Data.Ord (comparing)
 import Graph
 
-degree :: (Eq a) => Graph a -> a -> Int
+degree :: Eq a => Graph a -> a -> Int
 degree g@(Graph _ es) n = foldl' f 0 es
   where
     f z (a, b)
       | a == n || b == n = succ z
       | otherwise = z
 
-sortByDegree :: (Eq a) => Graph a -> [a]
+sortByDegree :: Eq a => Graph a -> [a]
 sortByDegree g@(Graph ns _) = sortBy (comparing (degree g)) ns
 
-kcolor :: (Eq a) => Graph a -> [(a, Int)]
+kcolor :: Eq a => Graph a -> [(a, Int)]
 kcolor g  = foldr f [] . sortByDegree $ g
   where
     f n cs = (n, choose 1) : cs

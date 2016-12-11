@@ -1,6 +1,6 @@
 import Graph
 
-connectedcomponents :: (Eq a) => Graph a -> [[a]]
+connectedcomponents :: Eq a => Graph a -> [[a]]
 connectedcomponents g@(Graph ns _) = iter ([], []) ns
   where
     iter (xss, _) [] = reverse xss
