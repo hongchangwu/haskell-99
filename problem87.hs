@@ -1,12 +1,13 @@
-import Data.List (find)
-import Data.Maybe (fromJust)
 import Graph
 
 depthfirst :: (Eq a) => Graph a -> a -> [a]
-depthfirst g@(Graph ns es) = reverse . visit []
+depthfirst g = reverse . visit []
   where
-    Adj adjs = graphToAdj g
-    neighbors n  = snd . fromJust . find ((==) n . fst) $ adjs
     visit acc n = if n `elem` acc
                   then acc
-                  else foldl visit (n : acc) (neighbors n)
+                  else foldl visit (n : acc) (neighbors n g)
+
+main :: IO ()
+main = do
+  let g = Graph [1,2,3,4,5,6,7] [(1,2),(2,3),(1,4),(3,4),(5,2),(5,4),(6,7)] :: Graph Int
+  print $ depthfirst g 1
