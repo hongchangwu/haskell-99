@@ -1,23 +1,21 @@
 import Control.Monad (guard)
+import Data.List (delete)
 
 queens :: Int -> [[Int]]
-queens n = queens' [([], [])] 0
+queens n = queens' [([], ks)] 0
   where
     ks = take n [0 ..]
-    queens' yss j
-      | j >= n = map (map (+ 1) . reverse . fst) yss
+    queens' zss j
+      | j >= n = map (map (+ 1) . reverse . fst) zss
       | otherwise =
-        let yss' = do
-              (xs, ijs) <- yss
-              i <- ks
-              guard $ valid i j ijs
-              return (i : xs, rows i ++ cols j ++ diags i j ++ ijs)
-        in queens' yss' (succ j)
-    valid i j ijs = (i, j) `notElem` ijs
-    rows i = [(i, k) | k <- ks]
-    cols j = [(k, j) | k <- ks]
-    diags i j = [(i + k, j + k) | k <- [max (-i) (-j)..min (n - i) (n - j)]] ++
-                [(i - k, j + k) | k <- [max (i - n) (-j)..min i (n - j)]]
+        let zss' = do
+              (xs, ys) <- zss
+              i <- ys
+              guard $ safe i xs
+              return (i : xs, delete i ys)
+        in queens' zss' (succ j)
+      where
+        safe i xs = and [i /= r + n && i /= r - n | (n, r) <- zip [1..] xs]
 
 main :: IO ()
 main = do
