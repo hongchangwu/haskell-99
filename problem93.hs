@@ -1,4 +1,5 @@
 import           Control.Arrow (first)
+import           Control.Monad (guard)
 import           Data.Ratio
 
 data Expr
@@ -44,14 +45,15 @@ expressions xs = do
   return $ op x y
 
 puzzle :: [Int] -> [String]
-puzzle xs = map show . filter valid $ candidates
+puzzle xs = map show solutions
   where
-    valid (Equation x y) = eval x == eval y
-    candidates = do
+    solutions = do
       (us, vs) <- partitions xs
       x <- expressions us
       y <- expressions vs
-      return $ Equation x y
+      let equation = Equation x y
+      guard $ eval x == eval y
+      return equation
 
 main :: IO ()
 main = mapM_ putStrLn $ puzzle [2, 3, 5, 7, 11]
