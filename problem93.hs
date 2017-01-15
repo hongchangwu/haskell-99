@@ -1,18 +1,15 @@
-import Data.Ratio
+import           Control.Arrow (first)
+import           Data.Ratio
 
 data Expr
   = Val Int
-  | Add Expr
-        Expr
-  | Sub Expr
-        Expr
-  | Mul Expr
-        Expr
-  | Div Expr
-        Expr
+  | Add Expr Expr
+  | Sub Expr Expr
+  | Mul Expr Expr
+  | Div Expr Expr
 
 instance Show Expr where
-  show (Val x) = show x
+  show (Val x)   = show x
   show (Add x y) = "(+ " ++ show x ++ " " ++ show y ++ ")"
   show (Sub x y) = "(- " ++ show x ++ " " ++ show y ++ ")"
   show (Mul x y) = "(* " ++ show x ++ " " ++ show y ++ ")"
@@ -24,20 +21,17 @@ instance Show Equation where
   show (Equation l r) = show l ++ " = " ++ show r
 
 eval :: Expr -> Ratio Int
-eval (Val x) = x % 1
+eval (Val x)   = x % 1
 eval (Add x y) = eval x + eval y
 eval (Sub x y) = eval x - eval y
 eval (Mul x y) = eval x * eval y
 eval (Div x y) = eval x / eval y
 
-applyFst :: (a -> b) -> (a, c) -> (b, c)
-applyFst f (x, y) = (f x, y)
-
 partitions :: [a] -> [([a], [a])]
 partitions [] = []
 partitions [_] = []
 partitions (x:xs) =
-  ([x], xs) : map (applyFst (x :)) (partitions xs)
+  ([x], xs) : map (first (x :)) (partitions xs)
 
 expressions :: [Int] -> [Expr]
 expressions [] = []
@@ -50,7 +44,7 @@ expressions xs = do
   return $ op x y
 
 puzzle :: [Int] -> [String]
-puzzle xs =  map show .  filter valid $ candidates
+puzzle xs = map show . filter valid $ candidates
   where
     valid (Equation x y) = eval x == eval y
     candidates = do
