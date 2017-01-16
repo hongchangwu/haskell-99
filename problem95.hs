@@ -1,4 +1,4 @@
-import           Data.List (intersperse, (!!))
+import           Data.List (intercalate, (!!))
 
 digits :: Int -> [Int]
 digits 0 = [0]
@@ -12,7 +12,7 @@ digits x = digits' [] x
 
 
 fullWords :: Int -> String
-fullWords = concat . intersperse "-" . map (dict !!) . digits
+fullWords = intercalate "-" . map (dict !!) . digits
   where
     dict =
       [ "zero"
