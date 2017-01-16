@@ -1,20 +1,4 @@
-import Data.Function ((&))
-import Data.List (find, permutations, sort)
-import Data.Maybe (fromJust)
-import Graph
-
-iso :: (Eq a, Ord a) => Graph a -> Graph a -> Bool
-iso g1@(Graph ns1 _) g2@(Graph ns2 _)
-  | length ns1 /= length ns2 =
-      False
-  | otherwise =
-      permutations ns2 &
-      map (zip ns1) &
-      any (\xys ->
-             let f x = snd . fromJust . find ((== x) . fst) $ xys
-             in all
-                (\n -> sort (map f (neighbors n g1)) == sort (neighbors (f n) g2))
-                ns1)
+import           Graph
 
 main :: IO ()
 main = do

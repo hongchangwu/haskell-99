@@ -1,17 +1,21 @@
 module Graph where
 
-import Control.Applicative (liftA2)
-import Data.List ((\\))
-import Data.Maybe (mapMaybe)
+import           Control.Applicative (liftA2)
+import           Data.Function       ((&))
+import           Data.List           (find, permutations, sort, (\\))
+import           Data.Maybe          (fromJust, mapMaybe)
 
-data Graph a = Graph [a] [(a, a)]
-               deriving (Eq, Show)
+data Graph a =
+  Graph [a] [(a, a)]
+  deriving (Eq, Show)
 
-data Adjacency a = Adj [(a, [a])]
-             deriving (Eq, Show)
+newtype Adjacency a =
+  Adj [(a, [a])]
+  deriving (Eq, Show)
 
-data Friendly a = Edge [(a, a)]
-                deriving (Eq, Show)
+newtype Friendly a =
+  Edge [(a, a)]
+  deriving (Eq, Show)
 
 graphToAdj :: (Eq a) => Graph a -> Adjacency a
 graphToAdj (Graph [] []) = Adj []
@@ -62,3 +66,15 @@ neighbors n (Graph _ es) = mapMaybe f es
       | a == n = Just b
       | b == n = Just a
       | otherwise = Nothing
+
+iso :: (Eq a, Ord a) => Graph a -> Graph a -> Bool
+iso g1@(Graph ns1 _) g2@(Graph ns2 _)
+  | length ns1 /= length ns2 = False
+  | otherwise =
+    permutations ns2 & map (zip ns1) &
+    any
+      (\xys ->
+          let f x = snd . fromJust . find ((== x) . fst) $ xys
+          in all
+               (\n -> sort (map f (neighbors n g1)) == sort (neighbors (f n) g2))
+               ns1)
