@@ -11,11 +11,10 @@ newtype Board = Board
   }
 
 instance Show Board where
-  show (Board xss) =
-    unlines .
-    intercalate [divider] .
-    map (intersperse blankLine . map showLine) . chunksOf 3 $
-    Vector.toList xss
+  show =
+    unlines . intercalate [divider] .
+    map (intersperse blankLine . map showLine) . chunksOf 3 .
+    Vector.toList . board
     where
       showLine =
         intercalate " | " .
@@ -26,14 +25,12 @@ instance Show Board where
       divider = intercalate "+" $ map (`replicate` '-') [8, 9, 8]
 
 instance Read Board where
-  readsPrec _ s =
-    return .
-    flip (,) "" .
-    Board .
-    Vector.fromList .
+  readsPrec =
+    const $
+    return . flip (,) "" .
+    Board . Vector.fromList .
     concatMap (map readLine . concat . splitWhen ((==) ' ' . head)) .
-    splitWhen ((==) '-' . head) $
-    lines s
+    splitWhen ((==) '-' . head) . lines
     where
       readLine =
         Vector.fromList .
@@ -59,24 +56,22 @@ unknowns (Board xss) =
   Vector.toList xss `zip` [0 ..]
 
 candidates :: Board -> Coord -> [Int]
-candidates b (i, j) = vals \\ knowns
+candidates b c = vals \\ knowns
   where
-    knowns = filter (not . unknown) (row b i ++ col b j ++ box b k)
+    knowns = filter (not . unknown) (neighbors b c)
+
+neighbors :: Board -> Coord -> [Int]
+neighbors (Board xss) (i, j) = row i ++ col j ++ box k
+  where
     k = i `div` 3 * 3 + j `div` 3
-
-row :: Board -> Int -> [Int]
-row (Board xss) i = Vector.toList $ xss ! i
-
-col :: Board -> Int -> [Int]
-col (Board xss) j = map (\i -> xss ! i ! j) $ take (length xss) [0 ..]
-
-box :: Board -> Int -> [Int]
-box (Board xss) k =
-  [ xss ! i ! j
-  | i <- take 3 [3 * m ..]
-  , j <- take 3 [3 * n ..] ]
-  where
-    (m, n) = k `divMod` 3
+    row i = Vector.toList $ xss ! i
+    col j = map (\i -> xss ! i ! j) $ take (length xss) [0 ..]
+    box k =
+      [ xss ! i ! j
+      | i <- take 3 [3 * m ..]
+      , j <- take 3 [3 * n ..] ]
+      where
+        (m, n) = k `divMod` 3
 
 update :: Board -> Coord -> Int -> Board
 update (Board xss) (i, j) x = Board $ xss // [(i, xss ! i // [(j, x)])]
