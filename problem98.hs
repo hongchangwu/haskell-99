@@ -1,14 +1,11 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
-import           Control.Monad    (foldM)
-import           Data.Char        (chr, ord)
-import           Data.List        (foldl', intersperse, sortBy, tails,
-                                   transpose)
-import           Data.Ord         (comparing)
-import           Data.Set         (Set)
-import qualified Data.Set         as Set
-import           Numeric.Interval ((...))
-import qualified Numeric.Interval as Interval
+import           Control.Monad (foldM)
+import           Data.Char     (chr, ord)
+import           Data.List     (foldl', intersperse, sortBy, transpose)
+import           Data.Ord      (comparing)
+import           Data.Set      (Set)
+import qualified Data.Set      as Set
 
 type Board = Set (Int, Int)
 
@@ -17,6 +14,11 @@ data Constraint
                  ,  nums :: [Int]}
   | ColConstraint { col  :: Int
                  ,  nums :: [Int]}
+
+data Interval = Interval
+  { inf :: Int
+  , sup :: Int
+  }
 
 data Nonogram = Nonogram
   { board :: Board
@@ -61,19 +63,19 @@ solve Nonogram {board, rows, cols} = Nonogram {board = solution, rows, cols}
     n = length cols
     intervals ks n = foldM g [] ks
       where
-        f k n = [i ... i + k - 1 | i <- [0 .. n - k]]
+        f k n = [Interval i ( i + k - 1) | i <- [0 .. n - k]]
         g acc k =
           [ x : acc
           | x <- f k n
           , all
               (\y ->
-                 Interval.inf x - Interval.sup y > 1 ||
-                 Interval.inf y - Interval.sup x > 1)
+                 inf x - sup y > 1 ||
+                 inf y - sup x > 1)
               acc
           ]
     points = foldl' f Set.empty
       where
-        f z x = Set.union z (Set.fromList [Interval.inf x .. Interval.sup x])
+        f z x = Set.union z (Set.fromList [inf x .. sup x])
     solution =
       fst . head $ foldM f (Set.empty, (Set.empty, Set.empty)) constraints
       where
