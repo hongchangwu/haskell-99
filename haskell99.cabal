@@ -1,0 +1,622 @@
+name:                haskell99
+version:             0.1.0.0
+synopsis:            Ninety-Nine Haskell Problems
+description:         This repository contains solutions to the problems
+                     found in Ninety-Nine Haskell Problems
+homepage:            https://github.com/hongchangwu/haskell-99
+license:             BSD3
+license-file:        LICENSE
+author:              Hongchang Wu
+maintainer:          wuhc85@gmail.com
+copyright:           Copyright (c) 2017 Hongchang Wu
+category:            Algorithms, Education
+build-type:          Simple
+data-dir:            data
+data-files:          *.txt
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Graph, Logic, MultiTree, Number, Tree, WeightedGraph
+  build-depends:       base >= 4.7 && < 5, regex-compat
+  default-language:    Haskell2010
+
+executable problem01
+  hs-source-dirs:      app/problem01
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem02
+  hs-source-dirs:      app/problem02
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem03
+  hs-source-dirs:      app/problem03
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem04
+  hs-source-dirs:      app/problem04
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem05
+  hs-source-dirs:      app/problem05
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem06
+  hs-source-dirs:      app/problem06
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem07
+  hs-source-dirs:      app/problem07
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem08
+  hs-source-dirs:      app/problem08
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem09
+  hs-source-dirs:      app/problem09
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem10
+  hs-source-dirs:      app/problem10
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem11
+  hs-source-dirs:      app/problem11
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem12
+  hs-source-dirs:      app/problem12
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem13
+  hs-source-dirs:      app/problem13
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem14
+  hs-source-dirs:      app/problem14
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem15
+  hs-source-dirs:      app/problem15
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem16
+  hs-source-dirs:      app/problem16
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem17
+  hs-source-dirs:      app/problem17
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem18
+  hs-source-dirs:      app/problem18
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem19
+  hs-source-dirs:      app/problem19
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem20
+  hs-source-dirs:      app/problem20
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem21
+  hs-source-dirs:      app/problem21
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem22
+  hs-source-dirs:      app/problem22
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem23
+  hs-source-dirs:      app/problem23
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, random
+  default-language:    Haskell2010
+
+executable problem24
+  hs-source-dirs:      app/problem24
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, random
+  default-language:    Haskell2010
+
+executable problem25
+  hs-source-dirs:      app/problem25
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, random
+  default-language:    Haskell2010
+
+executable problem26
+  hs-source-dirs:      app/problem26
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem27
+  hs-source-dirs:      app/problem27
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem28
+  hs-source-dirs:      app/problem28
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem31
+  hs-source-dirs:      app/problem31
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem32
+  hs-source-dirs:      app/problem32
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem33
+  hs-source-dirs:      app/problem33
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem34
+  hs-source-dirs:      app/problem34
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem35
+  hs-source-dirs:      app/problem35
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem36
+  hs-source-dirs:      app/problem36
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem37
+  hs-source-dirs:      app/problem37
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem39
+  hs-source-dirs:      app/problem39
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem40
+  hs-source-dirs:      app/problem40
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem41
+  hs-source-dirs:      app/problem41
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem46
+  hs-source-dirs:      app/problem46
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem47
+  hs-source-dirs:      app/problem47
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem48
+  hs-source-dirs:      app/problem48
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem49
+  hs-source-dirs:      app/problem49
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem50
+  hs-source-dirs:      app/problem50
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, heaps
+  default-language:    Haskell2010
+
+executable problem55
+  hs-source-dirs:      app/problem55
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem56
+  hs-source-dirs:      app/problem56
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem57
+  hs-source-dirs:      app/problem57
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem58
+  hs-source-dirs:      app/problem58
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem59
+  hs-source-dirs:      app/problem59
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem60
+  hs-source-dirs:      app/problem60
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem61
+  hs-source-dirs:      app/problem61
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem61a
+  hs-source-dirs:      app/problem61a
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem62
+  hs-source-dirs:      app/problem62
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem62b
+  hs-source-dirs:      app/problem62b
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem63
+  hs-source-dirs:      app/problem63
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem64
+  hs-source-dirs:      app/problem64
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem65
+  hs-source-dirs:      app/problem65
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem66
+  hs-source-dirs:      app/problem66
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem67a
+  hs-source-dirs:      app/problem67a
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem68
+  hs-source-dirs:      app/problem68
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem69
+  hs-source-dirs:      app/problem69
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem70
+  hs-source-dirs:      app/problem70
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem70c
+  hs-source-dirs:      app/problem70c
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem71
+  hs-source-dirs:      app/problem71
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem72
+  hs-source-dirs:      app/problem72
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem73
+  hs-source-dirs:      app/problem73
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem80
+  hs-source-dirs:      app/problem80
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem81
+  hs-source-dirs:      app/problem81
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem82
+  hs-source-dirs:      app/problem82
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem83
+  hs-source-dirs:      app/problem83
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem84
+  hs-source-dirs:      app/problem84
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem85
+  hs-source-dirs:      app/problem85
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem86
+  hs-source-dirs:      app/problem86
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem87
+  hs-source-dirs:      app/problem87
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem88
+  hs-source-dirs:      app/problem88
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem89
+  hs-source-dirs:      app/problem89
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, haskell99
+  default-language:    Haskell2010
+
+executable problem90
+  hs-source-dirs:      app/problem90
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem91
+  hs-source-dirs:      app/problem91
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem92
+  hs-source-dirs:      app/problem92
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, containers
+  default-language:    Haskell2010
+
+executable problem93
+  hs-source-dirs:      app/problem93
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem94
+  hs-source-dirs:      app/problem94
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, containers, haskell99
+  default-language:    Haskell2010
+
+executable problem95
+  hs-source-dirs:      app/problem95
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem96
+  hs-source-dirs:      app/problem96
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+  default-language:    Haskell2010
+
+executable problem97
+  hs-source-dirs:      app/problem97
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, filepath, split, vector
+  default-language:    Haskell2010
+
+executable problem98
+  hs-source-dirs:      app/problem98
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, containers
+  default-language:    Haskell2010
+
+executable problem99
+  hs-source-dirs:      app/problem99
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base, containers
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/hongchangwu/haskell-99
