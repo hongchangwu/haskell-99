@@ -8,6 +8,7 @@ hbalTreeNodes x n =
   | i <- [lb .. ub]
   , u <- hbalTreeNodes x i
   , v <- hbalTreeNodes x (n - i - 1)
+  , abs (height u - height v) <= 1
   ]
   where
     a = ceiling (fromIntegral (n - 1) / 5)
@@ -18,4 +19,3 @@ main :: IO ()
 main = do
   print . length $ hbalTreeNodes 'x' 15
   print $ map (hbalTreeNodes 'x') [0..5]
-
