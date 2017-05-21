@@ -4,7 +4,7 @@ data NestedList a
 
 flatten :: NestedList x -> [x]
 flatten (Elem x) = [x]
-flatten (List x) = foldl (++) [] $ map flatten x
+flatten (List x) = concatMap flatten x
 
 main :: IO ()
 main = do
