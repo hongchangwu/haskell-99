@@ -1,7 +1,7 @@
 import           Tree
 
 construct :: Ord a => [a] -> Tree a
-construct = foldl (flip insert') Empty
+construct = foldr insert' Empty
 
 main :: IO ()
 main = do
