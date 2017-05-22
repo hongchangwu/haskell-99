@@ -1,7 +1,8 @@
 module MultiTree where
 
-data MultiTree a = Node a [MultiTree a]
-                 deriving (Eq, Show)
+data MultiTree a =
+  Node a [MultiTree a]
+  deriving (Eq, Show)
 
 tree1 :: MultiTree Char
 tree1 = Node 'a' []
@@ -16,14 +17,7 @@ tree4 :: MultiTree Char
 tree4 = Node 'b' [Node 'd' [], Node 'e' []]
 
 tree5 :: MultiTree Char
-tree5 = Node 'a' [
-                Node 'f' [Node 'g' []],
-                Node 'c' [],
-                Node 'b' [Node 'd' [], Node 'e' []]
-                ]
-
-
-
-
-
-                          
+tree5 =
+  Node
+    'a'
+    [Node 'f' [Node 'g' []], Node 'c' [], Node 'b' [Node 'd' [], Node 'e' []]]
