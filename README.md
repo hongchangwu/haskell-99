@@ -16,3 +16,10 @@ To run a specific problem:
 ```
 stack exec problem01
 ```
+
+## Using Docker images
+
+```
+docker pull hongchangwu/haskell-99
+docker run hongchangwu/haskell-99 problem01
+```
