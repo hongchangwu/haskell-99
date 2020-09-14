@@ -1,4 +1,4 @@
-import           MultiTree
+import MultiTree
 
 ipl :: MultiTree a -> Int
 ipl (Node _ ss) = length ss + sum (map calc ss)

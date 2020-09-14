@@ -1,5 +1,5 @@
-import           Data.List (intersperse)
-import           MultiTree
+import Data.List (intersperse)
+import MultiTree
 
 displayLisp :: MultiTree Char -> String
 displayLisp (Node x []) = [x]

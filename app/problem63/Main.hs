@@ -1,4 +1,4 @@
-import           Tree
+import Tree
 
 completeBinaryTree :: Int -> Tree Char
 completeBinaryTree 0 = Empty

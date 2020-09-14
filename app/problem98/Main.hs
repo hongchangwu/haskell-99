@@ -1,50 +1,56 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
-import           Control.Monad (foldM)
-import           Data.Char     (chr, ord)
-import           Data.List     (foldl', intersperse, sortBy, transpose)
-import           Data.Ord      (comparing)
-import           Data.Set      (Set)
-import qualified Data.Set      as Set
+import Control.Monad (foldM)
+import Data.Char (chr, ord)
+import Data.List (foldl', intersperse, sortBy, transpose)
+import Data.Ord (comparing)
+import Data.Set (Set)
+import qualified Data.Set as Set
 
 type Board = Set (Int, Int)
 
 data Constraint
-  = RowConstraint { row  :: Int
-                 ,  nums :: [Int]}
-  | ColConstraint { col  :: Int
-                 ,  nums :: [Int]}
+  = RowConstraint
+      { row :: Int,
+        nums :: [Int]
+      }
+  | ColConstraint
+      { col :: Int,
+        nums :: [Int]
+      }
 
-data Interval = Interval
-  { inf :: Int
-  , sup :: Int
-  }
+data Interval
+  = Interval
+      { inf :: Int,
+        sup :: Int
+      }
 
-data Nonogram = Nonogram
-  { board :: Board
-  , rows  :: [[Int]]
-  , cols  :: [[Int]]
-  }
+data Nonogram
+  = Nonogram
+      { board :: Board,
+        rows :: [[Int]],
+        cols :: [[Int]]
+      }
 
 instance Show Nonogram where
   show nonogram =
     unlines $
-    [ showLine i ++ showConstraint xs
-    | (xs, i) <- rows nonogram `zip` [0 ..]
-    ] ++
-    [' ' : showConstraint xs | xs <- transpose (cols nonogram)]
+      [ showLine i ++ showConstraint xs
+        | (xs, i) <- rows nonogram `zip` [0 ..]
+      ]
+        ++ [' ' : showConstraint xs | xs <- transpose (cols nonogram)]
     where
       n = length (cols nonogram)
       showLine i =
-        '|' :
-        intersperse
-          '|'
-          [ if Set.member (i, j) (board nonogram)
-            then 'X'
-            else '_'
-          | j <- [0 .. n - 1]
-          ] ++
-        "| "
+        '|'
+          : intersperse
+            '|'
+            [ if Set.member (i, j) (board nonogram)
+                then 'X'
+                else '_'
+              | j <- [0 .. n - 1]
+            ]
+          ++ "| "
       showDigit = chr . (+ ord '0')
       showConstraint = intersperse ' ' . map showDigit
 
@@ -57,21 +63,23 @@ solve Nonogram {board, rows, cols} = Nonogram {board = solution, rows, cols}
     constraints =
       sortBy
         (flip $ comparing (sum . nums))
-        ([RowConstraint {row = i, nums = xs} | (xs, i) <- rows `zip` [0 ..]] ++
-         [ColConstraint {col = j, nums = xs} | (xs, j) <- cols `zip` [0 ..]])
+        ( [RowConstraint {row = i, nums = xs} | (xs, i) <- rows `zip` [0 ..]]
+            ++ [ColConstraint {col = j, nums = xs} | (xs, j) <- cols `zip` [0 ..]]
+        )
     m = length rows
     n = length cols
     intervals ks n = foldM g [] ks
       where
-        f k n = [Interval i ( i + k - 1) | i <- [0 .. n - k]]
+        f k n = [Interval i (i + k - 1) | i <- [0 .. n - k]]
         g acc k =
           [ x : acc
-          | x <- f k n
-          , all
-              (\y ->
-                 inf x - sup y > 1 ||
-                 inf y - sup x > 1)
-              acc
+            | x <- f k n,
+              all
+                ( \y ->
+                    inf x - sup y > 1
+                      || inf y - sup x > 1
+                )
+                acc
           ]
     points = foldl' f Set.empty
       where
@@ -88,10 +96,10 @@ solve Nonogram {board, rows, cols} = Nonogram {board = solution, rows, cols}
               map
                 (Set.map (\col -> (row, col)))
                 [ x'
-                | x <- intervals nums n
-                , let x' = points x
-                , Set.null (Set.difference y x')
-                , Set.null (Set.intersection c (Set.difference x' y))
+                  | x <- intervals nums n,
+                    let x' = points x,
+                    Set.null (Set.difference y x'),
+                    Set.null (Set.intersection c (Set.difference x' y))
                 ]
         f (z, (r, c)) ColConstraint {col, nums} =
           [(Set.union z x, (r, Set.insert col c)) | x <- xs]
@@ -102,10 +110,10 @@ solve Nonogram {board, rows, cols} = Nonogram {board = solution, rows, cols}
               map
                 (Set.map (\row -> (row, col)))
                 [ x'
-                | x <- intervals nums m
-                , let x' = points x
-                , Set.null (Set.difference y x')
-                , Set.null (Set.intersection r (Set.difference x' y))
+                  | x <- intervals nums m,
+                    let x' = points x,
+                    Set.null (Set.difference y x'),
+                    Set.null (Set.intersection r (Set.difference x' y))
                 ]
 
 main :: IO ()

@@ -1,6 +1,6 @@
-import           Control.Monad (replicateM)
-import           Logic
-import           Text.Printf
+import Control.Monad (replicateM)
+import Logic
+import Text.Printf
 
 tablen :: Int -> ([Bool] -> Bool) -> IO ()
 tablen n f = mapM_ printRow (replicateM n [True, False])

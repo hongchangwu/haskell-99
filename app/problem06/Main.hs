@@ -1,7 +1,7 @@
 isPalindrome :: Eq a => [a] -> Bool
-isPalindrome []     = True
-isPalindrome [_]    = True
-isPalindrome (x:xs) = x == last xs && (isPalindrome $ init xs)
+isPalindrome [] = True
+isPalindrome [_] = True
+isPalindrome (x : xs) = x == last xs && (isPalindrome $ init xs)
 
 main :: IO ()
 main = do

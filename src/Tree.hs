@@ -1,7 +1,7 @@
 module Tree where
 
-import           Data.List  (nub)
-import           Text.Regex (mkRegex, subRegex)
+import Data.List (nub)
+import Text.Regex (mkRegex, subRegex)
 
 data Tree a
   = Empty
@@ -32,48 +32,51 @@ symmetric :: Tree a -> Bool
 symmetric Empty = True
 symmetric (Branch _ u v) = mirror u v
   where
-    mirror Empty Empty                       = True
+    mirror Empty Empty = True
     mirror (Branch _ uu uv) (Branch _ vu vv) = mirror uu vv && mirror uv vu
-    mirror _ _                               = False
+    mirror _ _ = False
 
 isBalanced :: Tree a -> Bool
-isBalanced Empty          = True
+isBalanced Empty = True
 isBalanced (Branch a u v) = abs (count u - count v) <= 1
 
 count :: Tree a -> Int
-count Empty          = 0
+count Empty = 0
 count (Branch a u v) = 1 + (count u + count v)
 
-tree4 = Branch 1 (Branch 2 Empty (Branch 4 Empty Empty))
-                 (Branch 2 Empty Empty)
+tree4 =
+  Branch
+    1
+    (Branch 2 Empty (Branch 4 Empty Empty))
+    (Branch 2 Empty Empty)
 
 mapTree :: (a -> a) -> Tree a -> Tree a
-mapTree _ Empty          = Empty
+mapTree _ Empty = Empty
 mapTree f (Branch x l r) = Branch (f x) (mapTree f l) (mapTree f r)
 
 height :: Tree a -> Int
-height Empty          = 0
+height Empty = 0
 height (Branch a l r) = 1 + max (height l) (height r)
 
 stringToTree :: String -> Tree Char
-stringToTree []     = Empty
-stringToTree (x:xs) =
+stringToTree [] = Empty
+stringToTree (x : xs) =
   let (ls, rs) = splitOne ',' xs
       strip s = subRegex (mkRegex "[()]") s ""
-  in Branch x (stringToTree (strip ls)) (stringToTree (strip rs))
+   in Branch x (stringToTree (strip ls)) (stringToTree (strip rs))
   where
     splitOne c = go ""
       where
         go xs "" = (reverse xs, "")
-        go xs (y:ys)
+        go xs (y : ys)
           | y == c = (reverse xs, ys)
           | otherwise = go (y : xs) ys
 
 treeToString :: Tree Char -> String
-treeToString Empty          = ""
+treeToString Empty = ""
 treeToString (Branch x l r) =
   let ls = treeToString l
       rs = treeToString r
-  in if null ls && null rs
-       then [x]
-       else [x] ++ "(" ++ ls ++ "," ++ rs ++ ")"
+   in if null ls && null rs
+        then [x]
+        else [x] ++ "(" ++ ls ++ "," ++ rs ++ ")"

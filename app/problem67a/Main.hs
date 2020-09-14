@@ -1,4 +1,4 @@
-import           Tree
+import Tree
 
 main :: IO ()
 main = do

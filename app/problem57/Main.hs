@@ -1,4 +1,4 @@
-import           Tree
+import Tree
 
 construct :: Ord a => [a] -> Tree a
 construct = foldr insert' Empty

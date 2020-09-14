@@ -1,7 +1,7 @@
-import           Data.List  (find, foldl', sortBy)
-import           Data.Maybe (fromJust, mapMaybe)
-import           Data.Ord   (comparing)
-import           Graph
+import Data.List (find, foldl', sortBy)
+import Data.Maybe (fromJust, mapMaybe)
+import Data.Ord (comparing)
+import Graph
 
 degree :: Eq a => Graph a -> a -> Int
 degree g@(Graph _ es) n = foldl' f 0 es
@@ -31,20 +31,20 @@ main = do
   let g =
         Graph
           ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-          [ ('a', 'b')
-          , ('a', 'e')
-          , ('a', 'f')
-          , ('b', 'c')
-          , ('b', 'g')
-          , ('c', 'd')
-          , ('c', 'h')
-          , ('d', 'e')
-          , ('d', 'i')
-          , ('e', 'j')
-          , ('f', 'h')
-          , ('f', 'i')
-          , ('g', 'i')
-          , ('g', 'j')
-          , ('h', 'j')
+          [ ('a', 'b'),
+            ('a', 'e'),
+            ('a', 'f'),
+            ('b', 'c'),
+            ('b', 'g'),
+            ('c', 'd'),
+            ('c', 'h'),
+            ('d', 'e'),
+            ('d', 'i'),
+            ('e', 'j'),
+            ('f', 'h'),
+            ('f', 'i'),
+            ('g', 'i'),
+            ('g', 'j'),
+            ('h', 'j')
           ]
   print $ kcolor g

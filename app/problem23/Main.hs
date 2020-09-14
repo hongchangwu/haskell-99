@@ -1,4 +1,4 @@
-import           System.Random
+import System.Random
 
 rndSelect :: [a] -> Int -> IO [a]
 rndSelect xs n = do

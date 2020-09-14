@@ -1,26 +1,31 @@
-import           Control.Monad   (foldM)
-import           Data.Char       (chr, ord)
-import           Data.List       (intercalate, intersperse, sortBy, (\\))
-import           Data.List.Split (chunksOf, splitOn, splitWhen)
-import           Data.Ord        (comparing)
-import           Data.Vector     (Vector, (!), (//))
-import qualified Data.Vector     as Vector
-import           Paths_haskell99
-import           System.FilePath ((</>))
+import Control.Monad (foldM)
+import Data.Char (chr, ord)
+import Data.List ((\\), intercalate, intersperse, sortBy)
+import Data.List.Split (chunksOf, splitOn, splitWhen)
+import Data.Ord (comparing)
+import Data.Vector ((!), (//), Vector)
+import qualified Data.Vector as Vector
+import Paths_haskell99
+import System.FilePath ((</>))
 
-newtype Board = Board
-  { board :: Vector (Vector Int)
-  }
+newtype Board
+  = Board
+      { board :: Vector (Vector Int)
+      }
 
 instance Show Board where
   show =
-    unlines . intercalate [divider] .
-    map (intersperse blankLine . map showLine) . chunksOf 3 .
-    Vector.toList . board
+    unlines . intercalate [divider]
+      . map (intersperse blankLine . map showLine)
+      . chunksOf 3
+      . Vector.toList
+      . board
     where
       showLine =
-        intercalate " | " .
-        map (intercalate "  " . map showCell) . chunksOf 3 . Vector.toList
+        intercalate " | "
+          . map (intercalate "  " . map showCell)
+          . chunksOf 3
+          . Vector.toList
       showCell 0 = "."
       showCell x = return $ chr (ord '0' + x)
       blankLine = intercalate "|" $ map (`replicate` ' ') [8, 9, 8]
@@ -29,16 +34,19 @@ instance Show Board where
 instance Read Board where
   readsPrec =
     const $
-    return . flip (,) "" .
-    Board . Vector.fromList .
-    concatMap (map readLine . concat . splitWhen ((==) ' ' . head)) .
-    splitWhen ((==) '-' . head) . lines
+      return . flip (,) ""
+        . Board
+        . Vector.fromList
+        . concatMap (map readLine . concat . splitWhen ((==) ' ' . head))
+        . splitWhen ((==) '-' . head)
+        . lines
     where
       readLine =
-        Vector.fromList .
-        concatMap (map readCell . concat . splitOn " ") . splitOn "|"
+        Vector.fromList
+          . concatMap (map readCell . concat . splitOn " ")
+          . splitOn "|"
       readCell '.' = 0
-      readCell x   = ord x - ord '0'
+      readCell x = ord x - ord '0'
 
 type Coord = (Int, Int)
 
@@ -51,11 +59,13 @@ unknown x = x == 0
 unknowns :: Board -> [Coord]
 unknowns (Board xss) =
   concatMap
-    (\(xs, i) ->
+    ( \(xs, i) ->
         [ (i, j)
-        | (x, j) <- Vector.toList xs `zip` [0 ..]
-        , unknown x ]) $
-  Vector.toList xss `zip` [0 ..]
+          | (x, j) <- Vector.toList xs `zip` [0 ..],
+            unknown x
+        ]
+    )
+    $ Vector.toList xss `zip` [0 ..]
 
 candidates :: Board -> Coord -> [Int]
 candidates b c = vals \\ knowns
@@ -70,8 +80,9 @@ neighbors (Board xss) (i, j) = row i ++ col j ++ box k
     col j = map (\i -> xss ! i ! j) $ take (length xss) [0 ..]
     box k =
       [ xss ! i ! j
-      | i <- take 3 [3 * m ..]
-      , j <- take 3 [3 * n ..] ]
+        | i <- take 3 [3 * m ..],
+          j <- take 3 [3 * n ..]
+      ]
       where
         (m, n) = k `divMod` 3
 
@@ -83,11 +94,13 @@ solve b = foldM f b xs
   where
     f b' (i, j) =
       [ update b' (i, j) x
-      | x <- candidates b' (i, j) ]
+        | x <- candidates b' (i, j)
+      ]
     xs =
       fst . unzip . sortBy (comparing (length . snd)) $
-      [ ((i, j), candidates b (i, j))
-      | (i, j) <- unknowns b ]
+        [ ((i, j), candidates b (i, j))
+          | (i, j) <- unknowns b
+        ]
 
 main :: IO ()
 main = do

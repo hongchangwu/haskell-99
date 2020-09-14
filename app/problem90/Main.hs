@@ -1,5 +1,5 @@
-import           Control.Monad (foldM)
-import           Data.List
+import Control.Monad (foldM)
+import Data.List
 
 queens :: Int -> [[Int]]
 queens n = map reverse $ foldM next [] [1 .. n]
