@@ -1,7 +1,7 @@
-import           Data.Heap (Heap)
+import Data.Heap (Heap)
 import qualified Data.Heap as Heap
-import           Data.List
-import           Data.Ord  (comparing)
+import Data.List
+import Data.Ord (comparing)
 
 data HTree a
   = Leaf a
@@ -18,7 +18,7 @@ instance Ord w => Ord (HItem w a) where
 huffman :: (Ord a, Ord w, Num w) => [(a, w)] -> [(a, String)]
 huffman xs =
   sortBy (comparing fst) . encode . htree . Heap.fromList $
-  [HItem (w, Leaf x) | (x, w) <- xs]
+    [HItem (w, Leaf x) | (x, w) <- xs]
   where
     htree ys =
       case Heap.uncons ys of
@@ -28,11 +28,11 @@ huffman xs =
             Just (HItem (w2, t2), ys'') ->
               htree $ Heap.insert (HItem (w1 + w2, Branch t1 t2)) ys''
     encode (Branch l r) =
-      [(x, '0' : code) | (x, code) <- encode l] ++
-      [(x, '1' : code) | (x, code) <- encode r]
+      [(x, '0' : code) | (x, code) <- encode l]
+        ++ [(x, '1' : code) | (x, code) <- encode r]
     encode (Leaf x) = [(x, "")]
 
 main :: IO ()
 main =
   print $
-  huffman [('a', 45), ('b', 13), ('c', 12), ('d', 16), ('e', 9), ('f', 5)]
+    huffman [('a', 45), ('b', 13), ('c', 12), ('d', 16), ('e', 9), ('f', 5)]

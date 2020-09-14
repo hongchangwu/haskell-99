@@ -1,18 +1,18 @@
-import           Data.List  (elemIndex)
-import           Data.Maybe (fromJust)
-import           Tree
+import Data.List (elemIndex)
+import Data.Maybe (fromJust)
+import Tree
 
 treeToPreorder :: Tree Char -> String
-treeToPreorder Empty          = ""
+treeToPreorder Empty = ""
 treeToPreorder (Branch x l r) = [x] ++ treeToPreorder l ++ treeToPreorder r
 
 treeToInorder :: Tree Char -> String
-treeToInorder Empty          = ""
+treeToInorder Empty = ""
 treeToInorder (Branch x l r) = treeToInorder l ++ [x] ++ treeToInorder r
 
 preInTree :: String -> String -> Tree Char
-preInTree ""     "" = Empty
-preInTree (x:xs) ys = Branch x (preInTree xs1 ys1) (preInTree xs2 ys2)
+preInTree "" "" = Empty
+preInTree (x : xs) ys = Branch x (preInTree xs1 ys1) (preInTree xs2 ys2)
   where
     i = fromJust $ elemIndex x ys
     (xs1, xs2) = splitAt i xs

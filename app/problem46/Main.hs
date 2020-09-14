@@ -1,4 +1,4 @@
-import           Logic
+import Logic
 
 table :: (Bool -> Bool -> Bool) -> IO ()
 table f = mapM_ printTable [(a, b) | a <- [True, False], b <- [True, False]]

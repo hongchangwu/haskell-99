@@ -1,4 +1,4 @@
-import           System.Random
+import System.Random
 
 diffSelect :: Int -> Int -> IO [Int]
 diffSelect n m

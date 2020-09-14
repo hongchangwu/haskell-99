@@ -1,4 +1,4 @@
-import           Number (isPrime, primesTME)
+import Number (isPrime, primesTME)
 
 goldbach :: Integral a => a -> (a, a)
 goldbach n
@@ -7,9 +7,9 @@ goldbach n
   where
     search n [] =
       error "Congratulations, you just disapprove the Goldbach's conjecture"
-    search n (x:xs) =
+    search n (x : xs) =
       case isPrime (n - x) of
-        True  -> (x, n - x)
+        True -> (x, n - x)
         False -> search n xs
 
 main :: IO ()

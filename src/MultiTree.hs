@@ -1,7 +1,7 @@
 module MultiTree where
 
-data MultiTree a =
-  Node a [MultiTree a]
+data MultiTree a
+  = Node a [MultiTree a]
   deriving (Eq, Show)
 
 tree1 :: MultiTree Char

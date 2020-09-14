@@ -1,5 +1,5 @@
-import           Data.Function ((&))
-import           Data.List     (partition)
+import Data.Function ((&))
+import Data.List (partition)
 
 paths :: Eq a => a -> a -> [(a, a)] -> [[a]]
 paths x y es = recur x es
@@ -12,5 +12,5 @@ paths x y es = recur x es
 
 main :: IO ()
 main = do
-  print $ paths 1 4 [(1,2),(2,3),(1,3),(3,4),(4,2),(5,6)]
-  print $ paths 2 6 [(1,2),(2,3),(1,3),(3,4),(4,2),(5,6)]
+  print $ paths 1 4 [(1, 2), (2, 3), (1, 3), (3, 4), (4, 2), (5, 6)]
+  print $ paths 2 6 [(1, 2), (2, 3), (1, 3), (3, 4), (4, 2), (5, 6)]

@@ -1,5 +1,5 @@
-import           Control.Applicative
-import           Graph
+import Control.Applicative
+import Graph
 
 k4 :: Graph Char
 k4 =
@@ -13,18 +13,21 @@ spantree (Graph ns es) = filter (liftA2 (&&) complete allconnected) trees
     trees = foldr acc [Graph [] []] es
     acc e@(u, v) gs =
       [ Graph
-        ((if u `elem` ns'
-            then []
-            else [u]) ++
-         (if v `elem` ns'
-            then []
-            else [v]) ++
-         ns')
-        (e : es')
-      | g@(Graph ns' es') <- gs
-      , not (connected g u v)
-      ] ++
-      gs
+          ( ( if u `elem` ns'
+                then []
+                else [u]
+            )
+              ++ ( if v `elem` ns'
+                     then []
+                     else [v]
+                 )
+              ++ ns'
+          )
+          (e : es')
+        | g@(Graph ns' es') <- gs,
+          not (connected g u v)
+      ]
+        ++ gs
     connected (Graph _ es') u v = v `elem` visit u []
       where
         visit x xs
@@ -34,11 +37,12 @@ spantree (Graph ns es) = filter (liftA2 (&&) complete allconnected) trees
             f (u, v) xs =
               if u == x
                 then visit v xs
-                else if v == x
-                       then visit u xs
-                       else xs
-    allconnected (Graph [] _)       = True
-    allconnected g@(Graph (n:ns) _) = all (connected g n) ns
+                else
+                  if v == x
+                    then visit u xs
+                    else xs
+    allconnected (Graph [] _) = True
+    allconnected g@(Graph (n : ns) _) = all (connected g n) ns
     complete (Graph ns' _) = length ns' == length ns
 
 main :: IO ()

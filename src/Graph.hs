@@ -1,20 +1,20 @@
 module Graph where
 
-import           Control.Applicative (liftA2)
-import           Data.Function       ((&))
-import           Data.List           (find, permutations, sort, (\\))
-import           Data.Maybe          (fromJust, mapMaybe)
+import Control.Applicative (liftA2)
+import Data.Function ((&))
+import Data.List ((\\), find, permutations, sort)
+import Data.Maybe (fromJust, mapMaybe)
 
-data Graph a =
-  Graph [a] [(a, a)]
+data Graph a
+  = Graph [a] [(a, a)]
   deriving (Eq, Show)
 
-newtype Adjacency a =
-  Adj [(a, [a])]
+newtype Adjacency a
+  = Adj [(a, [a])]
   deriving (Eq, Show)
 
-newtype Friendly a =
-  Edge [(a, a)]
+newtype Friendly a
+  = Edge [(a, a)]
   deriving (Eq, Show)
 
 graphToAdj :: (Eq a) => Graph a -> Adjacency a
@@ -48,10 +48,11 @@ friToGraph (Edge xs) = Graph ns es
     (ns, es) = loop [] [] xs
       where
         loop ns' es' [] = (ns', es')
-        loop ns' es' ((a, b) : ys) = let ns'' = ns' ++ if a == b then [a] else [a, b] \\ ns'
-                                         es'' = es' ++ if a == b then [] else [(a, b)]
-                                         ys' = filter (\(x, y) -> (x /= a || y /= b) && (x /= b || y /= a)) ys
-                                     in loop ns'' es'' ys'
+        loop ns' es' ((a, b) : ys) =
+          let ns'' = ns' ++ if a == b then [a] else [a, b] \\ ns'
+              es'' = es' ++ if a == b then [] else [(a, b)]
+              ys' = filter (\(x, y) -> (x /= a || y /= b) && (x /= b || y /= a)) ys
+           in loop ns'' es'' ys'
 
 adjToFri :: (Eq a) => Adjacency a -> Friendly a
 adjToFri = graphToFri . adjToGraph
@@ -71,10 +72,11 @@ iso :: (Eq a, Ord a) => Graph a -> Graph a -> Bool
 iso g1@(Graph ns1 _) g2@(Graph ns2 _)
   | length ns1 /= length ns2 = False
   | otherwise =
-    permutations ns2 & map (zip ns1) &
-    any
-      (\xys ->
-          let f x = snd . fromJust . find ((== x) . fst) $ xys
-          in all
-               (\n -> sort (map f (neighbors n g1)) == sort (neighbors (f n) g2))
-               ns1)
+    permutations ns2 & map (zip ns1)
+      & any
+        ( \xys ->
+            let f x = snd . fromJust . find ((== x) . fst) $ xys
+             in all
+                  (\n -> sort (map f (neighbors n g1)) == sort (neighbors (f n) g2))
+                  ns1
+        )

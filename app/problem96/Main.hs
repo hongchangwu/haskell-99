@@ -1,16 +1,16 @@
-import           Data.Char (isAlpha, isAlphaNum)
+import Data.Char (isAlpha, isAlphaNum)
 
 identifier :: String -> Bool
 identifier [] = False
-identifier (x:xs)
+identifier (x : xs)
   | isAlpha x = check xs
   | otherwise = False
   where
-    check []        = True
-    check ('-':xs') = check' xs'
-    check xs'       = check' xs'
+    check [] = True
+    check ('-' : xs') = check' xs'
+    check xs' = check' xs'
     check' [] = False
-    check' (x':xs')
+    check' (x' : xs')
       | isAlphaNum x' = check xs'
       | otherwise = False
 

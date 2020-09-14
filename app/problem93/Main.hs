@@ -1,6 +1,6 @@
-import           Control.Arrow (first)
-import           Control.Monad (guard)
-import           Data.Ratio
+import Control.Arrow (first)
+import Control.Monad (guard)
+import Data.Ratio
 
 data Expr
   = Val Int
@@ -13,7 +13,7 @@ class Precedence a where
   precedence :: a -> Int
 
 instance Precedence Expr where
-  precedence (Val _)   = 0
+  precedence (Val _) = 0
   precedence (Add _ _) = 6
   precedence (Sub _ _) = 6
   precedence (Mul _ _) = 7
@@ -24,7 +24,7 @@ showsOp d p op x y =
   showParen (d > p) $ showsPrec p x . showString op . showsPrec (succ p) y
 
 instance Show Expr where
-  showsPrec _ (Val x)     = shows x
+  showsPrec _ (Val x) = shows x
   showsPrec d e@(Add x y) = showsOp d (precedence e) "+" x y
   showsPrec d e@(Sub x y) = showsOp d (precedence e) "-" x y
   showsPrec d e@(Mul x y) = showsOp d (precedence e) "*" x y
@@ -36,7 +36,7 @@ instance Show Equation where
   show (Equation (l, r)) = show l ++ " = " ++ show r
 
 eval :: Expr -> Ratio Int
-eval (Val x)   = x % 1
+eval (Val x) = x % 1
 eval (Add x y) = eval x + eval y
 eval (Sub x y) = eval x - eval y
 eval (Mul x y) = eval x * eval y
@@ -45,7 +45,7 @@ eval (Div x y) = eval x / eval y
 partitions :: [a] -> [([a], [a])]
 partitions [] = []
 partitions [_] = []
-partitions (x:xs) =
+partitions (x : xs) =
   ([x], xs) : map (first (x :)) (partitions xs)
 
 rightAssociative :: Expr -> Bool
@@ -53,11 +53,11 @@ rightAssociative (Add _ (Add _ _)) = True
 rightAssociative (Add _ (Sub _ _)) = True
 rightAssociative (Mul _ (Mul _ _)) = True
 rightAssociative (Mul _ (Div _ _)) = True
-rightAssociative _                 = False
+rightAssociative _ = False
 
 divByZero :: Expr -> Bool
 divByZero (Div _ (Val 0)) = True
-divByZero _               = False
+divByZero _ = False
 
 expressions :: [Int] -> [Expr]
 expressions [] = []

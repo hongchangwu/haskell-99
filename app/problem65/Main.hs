@@ -1,23 +1,30 @@
-import           Tree
+import Tree
 
-tree65 = Branch 'n'
-                (Branch 'k'
-                        (Branch 'c'
-                                (Branch 'a' Empty Empty)
-                                (Branch 'e'
-                                        (Branch 'd' Empty Empty)
-                                        (Branch 'g' Empty Empty)
-                                )
-                        )
-                        (Branch 'm' Empty Empty)
-                )
-                (Branch 'u'
-                        (Branch 'p'
-                                Empty
-                                (Branch 'q' Empty Empty)
-                        )
-                        Empty
-                )
+tree65 =
+  Branch
+    'n'
+    ( Branch
+        'k'
+        ( Branch
+            'c'
+            (Branch 'a' Empty Empty)
+            ( Branch
+                'e'
+                (Branch 'd' Empty Empty)
+                (Branch 'g' Empty Empty)
+            )
+        )
+        (Branch 'm' Empty Empty)
+    )
+    ( Branch
+        'u'
+        ( Branch
+            'p'
+            Empty
+            (Branch 'q' Empty Empty)
+        )
+        Empty
+    )
 
 layout :: Tree a -> Tree (a, (Int, Int))
 layout tree = recur tree 1
@@ -30,14 +37,14 @@ layout tree = recur tree 1
           r' = recur r (h + 1)
           xa =
             case l' of
-              Empty                  -> 1
+              Empty -> 1
               Branch (_, (x, _)) _ _ -> x + d
           r'' =
             case r' of
               Empty -> Empty
               Branch (_, (x, _)) _ _ ->
                 mapTree (\(a, (x', y)) -> (a, (x' + xa + d - x, y))) r'
-      in Branch (a, (xa, h)) l' r''
+       in Branch (a, (xa, h)) l' r''
 
 main :: IO ()
 main = print $ layout tree65
