@@ -26,5 +26,4 @@ pkgs.haskell-nix.project {
     name = "haskell99";
     src = ./.;
   };
-  compiler-nix-name = "ghc8102";
 }
